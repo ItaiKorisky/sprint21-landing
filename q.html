@@ -56,9 +56,12 @@
     .stage {
       flex: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-start;      /* mobile: content near the top, stable when the keyboard opens */
       justify-content: center;
-      padding: 24px 22px 40px;
+      padding: 5vh 22px 40px;
+    }
+    @media (min-width: 700px) {
+      .stage { align-items: center; padding-top: 24px; }
     }
     .screen {
       width: 100%;
@@ -224,6 +227,7 @@
       setTimeout(function () {
         screen.innerHTML = html;
         screen.classList.remove("out");
+        window.scrollTo(0, 0);
         var inp = screen.querySelector("input");
         if (inp) {
           inp.focus();
