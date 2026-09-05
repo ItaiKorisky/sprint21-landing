@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>שאלון - ספרינט אינסטגרם 21 יום</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADyUlEQVR4nO2baUgUYRjH//M4RpSZJpotiXYfZpkEhkhldlGaWaTZYkmHWZjWB5PugzK66EPRSX1IhFSE7uhUSTM7tSiz0jArowQTXa8UYxaSnR1119Gt2Xn7wQjvn+d5lv/zPjvMvKwcukCk/7BWWAHJOSWcubGcWkzLbQap2bw5Hjg5SWqaBmLFfEfeyFSA2jD2SGAcYmn32/NKxgIr/PFMYBwC43Asjr8hBMYhMA6BcQiMQ2AcAuMQGIfvqUIa92GYGhSGMRN94axxQ+8+dmjQ1eBHxWe8LXiMzCsXUfGpVFbtmO1H4DcrpG19NikRD25mKKMBvG0vLI3dgsBQLThOfN7Q195Bf3mMGofZi6NwM/U80k8fQktLi9n1hVzfwCBYCr47yUQ2iNt7HN5+003GckSYG7EK9o5OOLMvwaz6QmzsnmOwsbGBIu8BASFLzDJviP+cUEw2Y0dd3YZg24lUuGjcYElIbqIw7sGRayV61tVUJGpnYfVML+yKXoTiwieSmHna6E7rTgsOx55zl+E62AOWhpebONxzIgY4u4q0/HvXcf7g1rZ1aVEhjiSsxIGUO3B0Htimu48YC7v+Dqit/tmmCWMuTNP8ZeswZLQX/hYkN3Ho2AkSLftGukRrqK9DYX62RHdwchGtBfPxSScl5g2bpKgG/Phajtxbl/D62UNUlJWgoU6H8g/F7cbWVldJtMb6OpOfkXUtDecObIYivwLPc+7qL3PQuA8XrX81NaKq8nuH8Z9L3yHl2D68fpqL8b5TYBUPQh3hNFAjMVH0/BGafzWJtJbmZhTkZSL7apq+sa2tf+echrf0B2jXbwVvayvSbmdckMQJ5oVLVe8CYTEJmDR1tkgrepGPl4+kN8V/BVmq8IKo9QjSrhFp9bpanE3aBCXBW6LowpXx+gYYIjz/n9i9AZXfvkDVDQiLSZDsvHCDE8wX5mVBafA9WUx4K5wTvkKkNTU24PiOOBQ8vA8lwvfkzhubr9PV4GhidLvvA6pqwNyIVZKxr6muwsGNy1H2/g2UDN/dAj7+gQhfmyjSdDXV2B+n1T/RKR3qTvIAl0GI3nZYchIkHFlZg/luT8CyjTvRp28/ib5h/ymTuTtXh+Lj21ew2gnwGOkJH/8ZsHZIbqJwaqMGSG6it18AmG2AXX8H/Q1QDXD/fyDBOATGITAOgXEIjENgHALjEBiHuvIPRmojOaeE+z8BYBwS/rD4NfjjmYwFFjD0SmAcMlywMAXGHslUgJpozxvXWYJaDks621SSm2gtmPLAdaWYtUxEVzbuN4URNd+OcekWAAAAAElFTkSuQmCC" />
+
+  <style>
+    /* same design tokens as the landing page */
+    :root {
+      --bg: #f8f5f0;
+      --card: #ffffff;
+      --ink: #171310;
+      --soft: #6b6257;
+      --line: #e7e0d5;
+      --brown: #5d3c23;
+      --brown-deep: #47301c;
+      --body: 'Rubik', -apple-system, 'Segoe UI', Arial, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top {
+      padding: 22px 22px 0;
+      max-width: 560px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .progress {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--brown);
+      min-height: 1.4em;
+    }
+
+    .stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 22px 40px;
+    }
+    .screen {
+      width: 100%;
+      max-width: 560px;
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+    .screen.out { opacity: 0; transform: translateY(10px); }
+
+    h1 {
+      font-weight: 900;
+      font-size: clamp(1.7rem, 6.4vw, 2.4rem);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .q-title {
+      font-weight: 900;
+      font-size: clamp(1.5rem, 5.8vw, 2rem);
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .helper { color: var(--soft); margin-bottom: 18px; }
+    .sub { color: var(--soft); font-size: 1.05rem; margin-bottom: 30px; }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 17px 18px;
+      font-family: inherit;
+      font-size: 1.15rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      color: var(--ink);
+      margin-top: 12px;
+    }
+    input[type="text"]:focus {
+      outline: 2px solid var(--brown);
+      outline-offset: 1px;
+      border-color: var(--brown);
+    }
+    input.ltr { direction: ltr; text-align: right; }
+
+    .btn {
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      margin: 28px auto 0;
+      background: var(--brown);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 18px 28px;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 10px 26px rgba(93, 60, 35, 0.28);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { background: var(--brown-deep); transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .back {
+      display: inline-block;
+      margin-top: 18px;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--soft);
+      cursor: pointer;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+    }
+    .back:hover { color: var(--brown); border-color: var(--brown); }
+
+    .options { margin-top: 20px; display: grid; gap: 12px; }
+    .option {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 20px;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-align: right;
+      cursor: pointer;
+      transition: border-color 0.12s ease, transform 0.12s ease, background 0.12s ease;
+    }
+    .option:hover { border-color: var(--brown); transform: translateY(-1px); }
+    .option.selected { border-color: var(--brown); background: rgba(93, 60, 35, 0.07); font-weight: 700; }
+
+    .err {
+      color: #a33a1e;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 10px;
+      min-height: 1.3em;
+    }
+
+    .center { text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top"><div class="progress" id="progress"></div></div>
+  <div class="stage"><div class="screen" id="screen"></div></div>
+
+  <script>
+    /* ============================================================
+       CONFIG — same endpoint as the landing page
+       ============================================================ */
+    var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeEv845vnG4zFNqezLpvy5dY1l9VQZGS29GZXnJQiz60uO8t2FpCzHjy4QYBgW6SA/exec";
+    var META_PIXEL_ID = "1600794471751703";
+
+    /* contact details saved by the landing page form */
+    var contact = null;
+    try { contact = JSON.parse(sessionStorage.getItem("sprint_lead") || "null"); } catch (e) {}
+
+    /* answers survive page reloads */
+    var answers = {};
+    try { answers = JSON.parse(sessionStorage.getItem("sprint_quiz") || "{}"); } catch (e) {}
+    function saveAnswers() {
+      try { sessionStorage.setItem("sprint_quiz", JSON.stringify(answers)); } catch (e) {}
+    }
+
+    /* ============================================================
+       STEPS — contact steps are added only if the visitor somehow
+       reached this page without filling the landing-page form
+       ============================================================ */
+    var steps = [];
+    if (!contact || !contact.phone) {
+      steps.push({ key: "fullName", title: "מה השם שלך?", type: "text", placeholder: "שם מלא" });
+      steps.push({ key: "phone", title: "מה הטלפון שלך?", type: "text", placeholder: "050-0000000", ltr: true });
+    }
+    steps = steps.concat([
+      { key: "business",  title: "מה העסק שלך?", type: "text", placeholder: "לדוגמה: מאמן כושר אונליין / יועץ פיננסי / מאלף כלבים" },
+      { key: "instagram", title: "מה האינסטגרם שלך?", type: "text", placeholder: "@username", ltr: true },
+      { key: "followers", title: "כמה עוקבים יש לך באינסטגרם?", helper: "(בערך)", type: "text", placeholder: "לדוגמה: 2,000" },
+      { key: "leads",     title: "כמה פניות קיבלת מהאינסטגרם בחודש האחרון?", type: "text", placeholder: "לדוגמה: 2" },
+      { key: "videos",    title: "כמה סרטונים אתה מעלה בממוצע בשבוע? (אפשר גם טווח)", type: "text", placeholder: "לדוגמה: 4-5" },
+      { key: "boosts",    title: "כמה אתה משקיע על בוסטים באינסטגרם בחודש?", type: "options",
+        options: ["לא עושה בוסטים", "עד 500₪ בחודש", "500–1,500₪ בחודש", "1,500–3,000₪ בחודש", "3,000₪+ בחודש"] }
+    ]);
+
+    var current = -1;   // -1 = intro screen
+    var screen = document.getElementById("screen");
+    var progress = document.getElementById("progress");
+    var submitted = false;
+
+    function setScreen(html) {
+      screen.classList.add("out");
+      setTimeout(function () {
+        screen.innerHTML = html;
+        screen.classList.remove("out");
+        var inp = screen.querySelector("input");
+        if (inp) {
+          inp.focus();
+          inp.addEventListener("keydown", function (ev) {
+            if (ev.key === "Enter") { ev.preventDefault(); next(); }
+          });
+        }
+      }, 200);
+    }
+
+    function renderIntro() {
+      progress.textContent = "";
+      setScreen(
+        '<div class="center">' +
+        '<h1>תודה, הפרטים שלך התקבלו</h1>' +
+        '<p class="sub">אני חוזר קודם כל לאנשים שממלאים את כל הפרטים בשאלון - זה מעיד לי על רצינות ורצון אמיתי לעבוד.</p>' +
+        '<button class="btn" onclick="go(0)">מתחילים ←</button>' +
+        '</div>'
+      );
+    }
+
+    function renderStep(i) {
+      var s = steps[i];
+      progress.textContent = (i + 1) + " מתוך " + steps.length;
+      var html = '<div class="q-title">' + s.title + '</div>';
+      if (s.helper) html += '<div class="helper">' + s.helper + '</div>';
+
+      if (s.type === "options") {
+        html += '<div class="options">';
+        s.options.forEach(function (opt) {
+          var sel = answers[s.key] === opt ? " selected" : "";
+          html += '<button class="option' + sel + '" onclick="pick(\'' + s.key + '\', this)">' + opt + '</button>';
+        });
+        html += '</div>';
+      } else {
+        var val = answers[s.key] ? String(answers[s.key]).replace(/"/g, "&quot;") : "";
+        html += '<input type="text" id="answer"' + (s.ltr ? ' class="ltr"' : '') +
+                ' placeholder="' + s.placeholder + '" value="' + val + '" autocomplete="off" />';
+        html += '<button class="btn" onclick="next()">הבא ←</button>';
+      }
+
+      html += '<div class="err" id="err"></div>';
+      if (i > 0 || current > -1) html += '<div class="center"><button class="back" onclick="back()">→ חזרה</button></div>';
+      setScreen(html);
+    }
+
+    function renderFinal() {
+      progress.textContent = "";
+      setScreen(
+        '<div class="center">' +
+        '<h1>תודה, קיבלתי את התשובות שלך</h1>' +
+        '<p class="sub">אעבור עליהן ואצור איתך קשר בקרוב.</p>' +
+        '</div>'
+      );
+    }
+
+    function go(i) {
+      current = i;
+      if (i >= steps.length) { finish(); return; }
+      renderStep(i);
+    }
+
+    function back() {
+      if (current <= 0) { current = -1; renderIntro(); return; }
+      go(current - 1);
+    }
+
+    function next() {
+      var s = steps[current];
+      if (s.type !== "options") {
+        var inp = document.getElementById("answer");
+        if (!inp.value.trim()) {
+          document.getElementById("err").textContent = "רגע, חסרה תשובה :)";
+          inp.focus();
+          return;
+        }
+        answers[s.key] = inp.value.trim();
+        saveAnswers();
+      }
+      go(current + 1);
+    }
+
+    function pick(key, el) {
+      answers[key] = el.textContent;
+      saveAnswers();
+      el.classList.add("selected");
+      setTimeout(function () { go(current + 1); }, 250);
+    }
+
+    function finish() {
+      if (submitted) { renderFinal(); return; }
+      submitted = true;
+
+      var payload = {
+        type: "quiz",
+        fullName: (contact && contact.fullName) || answers.fullName || "",
+        phone: (contact && contact.phone) || answers.phone || "",
+        variant: (contact && contact.variant) || "",
+        business: answers.business || "",
+        instagram: answers.instagram || "",
+        followers: answers.followers || "",
+        leads: answers.leads || "",
+        videos: answers.videos || "",
+        boosts: answers.boosts || "",
+        page: window.location.href
+      };
+
+      /* the completed questionnaire is the real Lead for Meta */
+      if (window.fbq) fbq("track", "Lead");
+
+      if (FORM_ENDPOINT) {
+        fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) })
+          .catch(function () {});
+      }
+
+      try { sessionStorage.removeItem("sprint_quiz"); } catch (e) {}
+      renderFinal();
+    }
+
+    renderIntro();
+
+    /* ============================================================
+       META PIXEL
+       ============================================================ */
+    if (META_PIXEL_ID) {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,"script","https://connect.facebook.net/en_US/fbevents.js");
+      fbq("init", META_PIXEL_ID);
+      fbq("track", "PageView");
+    }
+  </script>
+</body>
+</html>

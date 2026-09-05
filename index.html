@@ -1195,7 +1195,7 @@
          (leave empty to just show the success message)
        ============================================================ */
     var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeEv845vnG4zFNqezLpvy5dY1l9VQZGS29GZXnJQiz60uO8t2FpCzHjy4QYBgW6SA/exec";
-    var REDIRECT_URL = "";    // e.g. "https://forms.gle/xxxx"
+    var REDIRECT_URL = "q.html";   // the questionnaire page
 
     document.querySelectorAll("form.lead-form").forEach(function (form) {
       form.addEventListener("submit", function (e) {
@@ -1222,6 +1222,9 @@
           variant: window.__headlineVariant || "",
           page: window.location.href
         };
+
+        // hand the contact details to the questionnaire page
+        try { sessionStorage.setItem("sprint_lead", JSON.stringify(payload)); } catch (err) {}
         var done = function () {
           if (REDIRECT_URL) {
             window.location.href = REDIRECT_URL;
@@ -1231,7 +1234,7 @@
           }
         };
 
-        if (window.fbq) fbq("track", "Lead");
+        if (window.fbq) fbq("trackCustom", "LeadFormSubmit"); // "Lead" fires on questionnaire completion
 
         if (FORM_ENDPOINT) {
           // no-cors + no headers so Google Apps Script accepts it without preflight
