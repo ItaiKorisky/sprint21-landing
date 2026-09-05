@@ -1234,7 +1234,7 @@
           }
         };
 
-        if (window.fbq) fbq("trackCustom", "LeadFormSubmit"); // "Lead" fires on questionnaire completion
+        if (window.fbq) fbq("track", "Lead"); // the lead is counted the moment name+phone are submitted
 
         if (FORM_ENDPOINT) {
           // no-cors + no headers so Google Apps Script accepts it without preflight
