@@ -643,8 +643,8 @@
       .hero { padding: 88px 0 40px; }
       .fit__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
       .fit__card { margin-bottom: 0; }
-      .objs { grid-template-columns: repeat(4, 1fr); }
-      .obj { width: auto; }
+      .objs { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .obj { width: auto; max-width: 300px; justify-self: center; }
       .obj__title { font-size: 0.85rem; }
     }
   </style>
@@ -1194,7 +1194,7 @@
        - REDIRECT_URL: where to send the lead after submit
          (leave empty to just show the success message)
        ============================================================ */
-    var FORM_ENDPOINT = "";   // e.g. "https://hook.eu1.make.com/xxxx"
+    var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxeEv845vnG4zFNqezLpvy5dY1l9VQZGS29GZXnJQiz60uO8t2FpCzHjy4QYBgW6SA/exec";
     var REDIRECT_URL = "";    // e.g. "https://forms.gle/xxxx"
 
     document.querySelectorAll("form.lead-form").forEach(function (form) {
@@ -1251,7 +1251,7 @@
        META PIXEL - paste your Pixel ID from Ads Manager to activate.
        Fires PageView on load and Lead on every form submit.
        ============================================================ */
-    var META_PIXEL_ID = "";   // e.g. "1234567890123456"
+    var META_PIXEL_ID = "1600794471751703";
 
     if (META_PIXEL_ID) {
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
