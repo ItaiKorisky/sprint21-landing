@@ -1165,8 +1165,14 @@
           return;
         }
 
-        var v = document.createElement("video");
-        v.src = src;
+        var v;
+        if (card.classList.contains("vsl__frame") && window.__vslPre) {
+          v = window.__vslPre;          // already buffered in the background
+          v.muted = false;
+        } else {
+          v = document.createElement("video");
+          v.src = src;
+        }
         v.playsInline = true;
         v.setAttribute("playsinline", "");
         v.style.cssText = "width:100%;height:100%;object-fit:cover;position:absolute;inset:0;background:#000;cursor:pointer";
@@ -1186,6 +1192,48 @@
         v.play();
       });
     });
+
+    /* ============================================================
+       VIDEO PRELOADING — the VSL starts buffering right after the
+       page loads so tapping Play feels instant; the objection
+       videos start buffering (one after another) once their
+       section gets close to the viewport.
+       ============================================================ */
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        var frame = document.querySelector(".vsl__frame");
+        if (!frame || !frame.getAttribute("data-video")) return;
+        var v = document.createElement("video");
+        v.preload = "auto";
+        v.muted = true;
+        v.playsInline = true;
+        v.setAttribute("playsinline", "");
+        v.src = frame.getAttribute("data-video");
+        window.__vslPre = v;
+      }, 1200);
+    });
+
+    (function prefetchObjections() {
+      var section = document.querySelector(".objs");
+      if (!section || !("IntersectionObserver" in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        var srcs = [];
+        section.querySelectorAll(".obj[data-video]").forEach(function (c) {
+          if (c.getAttribute("data-video")) srcs.push(c.getAttribute("data-video"));
+        });
+        srcs.forEach(function (s, i) {
+          setTimeout(function () {
+            var v = document.createElement("video");
+            v.preload = "auto";
+            v.muted = true;
+            v.src = s;
+          }, i * 4000);
+        });
+      }, { rootMargin: "900px" });
+      io.observe(section);
+    })();
 
     /* ============================================================
        LEAD FORMS (both forms share this handler)
