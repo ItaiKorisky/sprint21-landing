@@ -165,6 +165,11 @@
     }
 
     .center { text-align: center; }
+
+    .q-head { text-align: center; margin-bottom: 36px; }
+    .q-head h1 { font-size: clamp(1.55rem, 5.8vw, 2.1rem); margin-bottom: 10px; }
+    .q-head .sub { margin-bottom: 0; }
+    a.btn { text-decoration: none; }
   </style>
 </head>
 <body>
@@ -209,7 +214,7 @@
         options: ["לא עושה בוסטים", "עד 500₪ בחודש", "500–1,500₪ בחודש", "1,500–3,000₪ בחודש", "3,000₪+ בחודש"] }
     ]);
 
-    var current = -1;   // -1 = intro screen
+    var current = 0;
     var screen = document.getElementById("screen");
     var progress = document.getElementById("progress");
     var submitted = false;
@@ -229,21 +234,17 @@
       }, 200);
     }
 
-    function renderIntro() {
-      progress.textContent = "";
-      setScreen(
-        '<div class="center">' +
-        '<h1>תודה, הפרטים שלך התקבלו</h1>' +
-        '<p class="sub">אני חוזר קודם כל לאנשים שממלאים את כל הפרטים בשאלון - זה מעיד לי על רצינות ורצון אמיתי לעבוד.</p>' +
-        '<button class="btn" onclick="go(0)">מתחילים ←</button>' +
-        '</div>'
-      );
-    }
-
     function renderStep(i) {
       var s = steps[i];
       progress.textContent = (i + 1) + " מתוך " + steps.length;
-      var html = '<div class="q-title">' + s.title + '</div>';
+      var html = "";
+      if (i === 0) {
+        html += '<div class="q-head">' +
+                '<h1>לפני שאתה סוגר את הדף...</h1>' +
+                '<p class="sub">תמלא את השאלון הזה<br />אני נותן עדיפות לאנשים שממלאים אותו</p>' +
+                '</div>';
+      }
+      html += '<div class="q-title">' + s.title + '</div>';
       if (s.helper) html += '<div class="helper">' + s.helper + '</div>';
 
       if (s.type === "options") {
@@ -261,7 +262,7 @@
       }
 
       html += '<div class="err" id="err"></div>';
-      if (i > 0 || current > -1) html += '<div class="center"><button class="back" onclick="back()">→ חזרה</button></div>';
+      if (i > 0) html += '<div class="center"><button class="back" onclick="back()">→ חזרה</button></div>';
       setScreen(html);
     }
 
@@ -271,6 +272,9 @@
         '<div class="center">' +
         '<h1>תודה, קיבלתי את התשובות שלך</h1>' +
         '<p class="sub">אעבור עליהן ואצור איתך קשר בקרוב.</p>' +
+        '<p class="sub" style="margin-top: 34px;">בינתיים, אם עוד לא עשית את זה<br />' +
+        'מוזמן לעקוב אחריי באינסטגרם כדי לקבל עוד תוכן על שיווק ופרסונל ברנד ברשתות החברתיות</p>' +
+        '<a class="btn" href="https://www.instagram.com/itai.korisky/">לעקוב אחריי באינסטגרם</a>' +
         '</div>'
       );
     }
@@ -282,7 +286,7 @@
     }
 
     function back() {
-      if (current <= 0) { current = -1; renderIntro(); return; }
+      if (current <= 0) return;
       go(current - 1);
     }
 
@@ -338,7 +342,7 @@
       renderFinal();
     }
 
-    renderIntro();
+    go(0);
 
     /* ============================================================
        META PIXEL
