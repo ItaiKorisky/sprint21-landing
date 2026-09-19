@@ -233,9 +233,9 @@
     .play-badge::after {
       content: "";
       border-style: solid;
-      border-width: 11px 16px 11px 0;
-      border-color: transparent var(--dark) transparent transparent;
-      margin-left: 4px;
+      border-width: 11px 0 11px 16px;
+      border-color: transparent transparent transparent var(--dark);
+      margin-left: 5px;
     }
 
     /* ============================================================
@@ -573,7 +573,7 @@
       width: 56px;
       height: 56px;
     }
-    .obj .play-badge::after { border-width: 9px 13px 9px 0; }
+    .obj .play-badge::after { border-width: 9px 0 9px 13px; }
 
     /* ============================================================
        12. FIT / NOT FIT
@@ -617,8 +617,11 @@
     .final .form-section__sub { color: rgba(255, 255, 255, 0.82); }
     .final .form-card { border: none; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25); color: var(--ink); }
 
+    .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+    .footer-links a { color: var(--soft); text-decoration: none; font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--brown); text-decoration: underline; }
     footer {
-      padding: 34px 0 42px;
+      padding: 34px 0 96px;
       text-align: center;
       color: var(--soft);
       font-size: 0.85rem;
@@ -1081,7 +1084,16 @@
   </section>
 
   <footer>
-    <div class="wrap">ספרינט אינסטגרם 21 יום</div>
+    <div class="wrap">
+      <nav class="footer-links">
+        <a href="legal.html#terms">תנאי שימוש</a>
+        <a href="legal.html#privacy">מדיניות פרטיות</a>
+        <a href="legal.html#cookies">מדיניות עוגיות</a>
+        <a href="legal.html#a11y">הצהרת נגישות</a>
+        <a href="#" onclick="window.__openCookieSettings && __openCookieSettings(); return false;">הגדרות עוגיות</a>
+      </nav>
+      <div>© 2026 איתי קוריסקי · ספרינט אינסטגרם 21 יום</div>
+    </div>
   </footer>
 
   <script>
@@ -1304,7 +1316,10 @@
        ============================================================ */
     var META_PIXEL_ID = "1600794471751703";
 
-    if (META_PIXEL_ID) {
+    /* the pixel loads only after the visitor accepts cookies
+       (site.js calls this once consent is given) */
+    window.__initMetaPixel = function () {
+      if (!META_PIXEL_ID || window.fbq) return;
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
       n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;
@@ -1312,7 +1327,8 @@
       document,"script","https://connect.facebook.net/en_US/fbevents.js");
       fbq("init", META_PIXEL_ID);
       fbq("track", "PageView");
-    }
+    };
   </script>
+  <script src="site.js" defer></script>
 </body>
 </html>
