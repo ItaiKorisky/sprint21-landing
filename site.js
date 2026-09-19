@@ -36,9 +36,15 @@
     "#a11yPanel .stmt{display:block;text-align:center;font-size:.88rem;color:#5d3c23}",
     /* a11y effect classes */
     "html.a11y-fs1 body{zoom:1.1}html.a11y-fs2 body{zoom:1.22}html.a11y-fs3 body{zoom:1.35}",
-    "html.a11y-contrast body{filter:invert(1) hue-rotate(180deg);background:#000}",
+    /* filters are applied to the page content only — never to the
+       floating widget/banner, whose fixed positioning a filtered
+       ancestor would break */
+    "html.a11y-contrast body{background:#000}",
+    "html.a11y-contrast body>*:not(#a11yBtn):not(#a11yPanel):not(#ckBar){filter:invert(1) hue-rotate(180deg)}",
     "html.a11y-contrast body img,html.a11y-contrast body video,html.a11y-contrast body iframe{filter:invert(1) hue-rotate(180deg)}",
-    "html.a11y-gray{filter:grayscale(1)}",
+    "html.a11y-gray body>*:not(#a11yBtn):not(#a11yPanel):not(#ckBar){filter:grayscale(1)}",
+    "html.a11y-contrast.a11y-gray body>*:not(#a11yBtn):not(#a11yPanel):not(#ckBar){filter:invert(1) hue-rotate(180deg) grayscale(1)}",
+    "html.a11y-contrast.a11y-gray body img,html.a11y-contrast.a11y-gray body video{filter:invert(1) hue-rotate(180deg)}",
     "html.a11y-font body,html.a11y-font body *{font-family:Arial,Helvetica,sans-serif!important}",
     "html.a11y-links a{text-decoration:underline!important;text-underline-offset:3px;text-decoration-thickness:2px}",
     "html.a11y-noanim *{animation:none!important;transition:none!important}html.a11y-noanim{scroll-behavior:auto!important}",
